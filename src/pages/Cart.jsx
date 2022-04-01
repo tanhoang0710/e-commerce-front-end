@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { CgArrowLongLeft } from "react-icons/cg";
 import {
 	addSingleItemToCart,
 	removeItemFromCart,
@@ -40,6 +41,10 @@ export default function Cart() {
 		// 	top: 0,
 		// 	behavior: "smooth",
 		// });
+	};
+
+	const backToProductHandler = () => {
+		history.push("/products/sofa");
 	};
 
 	const authCtx = useContext(AuthContext);
@@ -134,6 +139,13 @@ export default function Cart() {
 								</tbody>
 							))}
 						</table>
+						<button
+							className="mt-5 bg-[#1f0f07] pr-5 pl-3 py-2 text-white flex items-center"
+							onClick={backToProductHandler}
+						>
+							<CgArrowLongLeft className="inline-block mr-3" />{" "}
+							TIẾP TỤC XEM SẢN PHẨM
+						</button>
 					</div>
 					<div className="w-[40%] pl-[30px]">
 						<h2 className="text-[#7a7978] font-normal uppercase text-[19px] leading-[30px] border-b-[3px]">

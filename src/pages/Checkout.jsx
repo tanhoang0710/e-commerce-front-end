@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Input from "../components/UI/Input";
 
@@ -10,6 +11,11 @@ export default function Checkout() {
 		(acc, item) => acc + item.totalPrice,
 		0
 	);
+
+	const history = useHistory();
+	const backToCartHandler = () => {
+		history.push("/cart");
+	};
 	return (
 		<div className="mt-[150px] flex pb-4">
 			<div className="w-[60%] pl-5">
@@ -68,6 +74,12 @@ export default function Checkout() {
 				>
 					ĐẶT HÀNG
 				</Link>
+				<button
+					className="hover:bg-[#6b3927] inline-block cursor-pointer transition-all duration-300 bg-[#b76041] text-white text-center mt-[30px] pt-2 text-[19px] px-[18px] py-[6px] ml-6"
+					onClick={backToCartHandler}
+				>
+					QUAY TRỞ LẠI GIỎ HÀNG
+				</button>
 				<p className="text-[#7a7978] font-light mt-6 text-[16px]">
 					Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng,
 					tăng trải nghiệm sử dụng website, và cho các mục đích cụ thể
