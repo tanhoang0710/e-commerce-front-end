@@ -28,7 +28,7 @@ import { useContext, useEffect } from "react";
 import AuthContext from "./components/context/auth-context";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-// import Chat from "./components/chat/Chat";
+import Chat from "./components/chat/Chat";
 
 // Configure Firebase.
 const config = {
@@ -180,7 +180,7 @@ function App() {
 				</Route>
 			</Switch>
 			<Footer suportItems={suportItems} />
-			{/* <Chat /> */}
+			<Chat />
 		</div>
 	);
 }
