@@ -28,6 +28,7 @@ import { useContext, useEffect } from "react";
 import AuthContext from "./components/context/auth-context";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import Chat from "./components/chat/Chat";
 
 // Configure Firebase.
 const config = {
@@ -121,7 +122,7 @@ function App() {
 	}, [authCtx]);
 
 	return (
-		<>
+		<div>
 			{/* 1 cai ko fixed con 1 cai fixed roi fade down xuong, fixed hay ko truyen tu props vao */}
 			<Nav />
 			<Switch>
@@ -179,7 +180,8 @@ function App() {
 				</Route>
 			</Switch>
 			<Footer suportItems={suportItems} />
-		</>
+			<Chat />
+		</div>
 	);
 }
 
