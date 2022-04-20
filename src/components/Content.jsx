@@ -9,7 +9,6 @@ export default function Content(props) {
 		<section className="flex mt-[40px] h-[600px]">
 			<div
 				className={`w-[130%] ${type === "1" ? `order-1` : `order-2`}`}
-				data-aos={`${type === "1" ? `fade-right` : `fade-left`}`}
 			>
 				<img
 					src={type === "1" ? Image1 : Image2}
@@ -21,7 +20,6 @@ export default function Content(props) {
 				className={`pt-[105px] px-5 pb-5 bg-[#dfdfdf] ${
 					type === "1" ? `order-2` : `order-1`
 				}`}
-				data-aos={`${type === "1" ? `fade-left` : `fade-right`}`}
 			>
 				<h3 className="text-[30px] text-[#787878] mb-7">
 					{type === "1" ? `THIẾT KẾ NỘI THẤT` : `THI CÔNG NỘI THẤT`}

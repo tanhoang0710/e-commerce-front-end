@@ -53,7 +53,6 @@ export default function Nav() {
 		<>
 			<nav
 				className="flex justify-between z-50 items-center bg-[#4b3737] px-[50px] text-white fixed top-0 left-0 w-full"
-				data-aos="fade-down"
 			>
 				<div className="w-[160px] h-[83px]">
 					<NavLink to="/">
