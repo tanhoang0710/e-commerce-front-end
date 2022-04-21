@@ -29,6 +29,7 @@ import AuthContext from "./components/context/auth-context";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import Chat from "./components/chat/Chat";
+import Call from "./components/call/Call";
 
 // Configure Firebase.
 const config = {
@@ -181,6 +182,7 @@ function App() {
 			</Switch>
 			<Footer suportItems={suportItems} />
 			<Chat />
+			<Call />
 		</div>
 	);
 }
