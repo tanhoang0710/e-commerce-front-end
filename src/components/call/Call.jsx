@@ -4,8 +4,8 @@ import "./Call.css";
 export default function Call() {
 	return (
 		<a href="tel:0869852063" className="fixed left-[25px] bottom-[25px]">
-			<div class="content-center ">
-				<div class="pulse">
+			<div className="content-center ">
+				<div className="pulse">
 					<IoCall className="text-white text-[26px]" />
 				</div>
 			</div>

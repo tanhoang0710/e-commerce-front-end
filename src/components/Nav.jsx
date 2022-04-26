@@ -51,9 +51,7 @@ export default function Nav() {
 
 	return (
 		<>
-			<nav
-				className="flex justify-between z-50 items-center bg-[#4b3737] px-[50px] text-white fixed top-0 left-0 w-full"
-			>
+			<nav className="flex justify-between z-50 items-center bg-[#4b3737] px-[50px] text-white fixed top-0 left-0 w-full">
 				<div className="w-[160px] h-[83px]">
 					<NavLink to="/">
 						<img src={Logo} alt="logo" className="w-full h-full" />
@@ -65,7 +63,7 @@ export default function Nav() {
 							<NavLink to="/introduce">Giới thiệu</NavLink>
 						</li>
 						<li className="uppercase px-[20px] group relative">
-							<NavLink to="/services">Dịch vụ</NavLink>
+							<button className="uppercase">Dịch vụ</button>
 							<ul className="absolute left-0 top-[100%] bg-black w-[260px] opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 mt-1">
 								{servicesName.map((name, index) => (
 									<li key={index}>
@@ -80,7 +78,7 @@ export default function Nav() {
 							</ul>
 						</li>
 						<li className="uppercase px-[20px] relative group">
-							<NavLink to="/products">Sản phẩm</NavLink>
+							<button className="uppercase">Sản phẩm</button>
 							<ul className="absolute left-0 top-[100%] bg-black w-[260px] opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 mt-1">
 								{productsName.map((name, index) => (
 									<li key={index}>
@@ -117,6 +115,16 @@ export default function Nav() {
 						>
 							Đăng xuất
 						</button>
+					)}
+					{authCtx.isLoggedIn && authCtx.isAdmin && (
+						<Link to={"/admin/manage"} className="mr-5">
+							QUẢN LÍ
+						</Link>
+					)}
+					{authCtx.isLoggedIn && !authCtx.isAdmin && (
+						<Link to={"/user/changepassword"} className="mr-5">
+							ĐỔI MẬT KHẨU
+						</Link>
 					)}
 					{/* <div className="mr-6 px-[18px] py-[5px] rounded-full bg-[#1f0f07]">
 						<span className="tracking-wide cursor-pointer">

@@ -30,6 +30,8 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import Chat from "./components/chat/Chat";
 import Call from "./components/call/Call";
+import Manage from "./pages/Manage";
+import ChangePassword from "./pages/ChangePassword";
 
 // Configure Firebase.
 const config = {
@@ -112,7 +114,6 @@ function App() {
 			.auth()
 			.onAuthStateChanged(async (user) => {
 				if (!user) {
-					console.log("User is not logged in");
 					return;
 				}
 				// console.log("Logged in user: ", user);
@@ -166,6 +167,16 @@ function App() {
 				<Route path="/checkout">
 					<Checkout />
 				</Route>
+				{authCtx.isLoggedIn && authCtx.isAdmin && (
+					<Route path="/admin/manage">
+						<Manage />
+					</Route>
+				)}
+				{authCtx.isLoggedIn && !authCtx.isAdmin && (
+					<Route path="/user/changepassword">
+						<ChangePassword />
+					</Route>
+				)}
 				{!authCtx.isLoggedIn && (
 					<Route path="/auth">
 						<Auth />

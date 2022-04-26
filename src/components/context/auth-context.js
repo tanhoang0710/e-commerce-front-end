@@ -3,6 +3,8 @@ import React, { useState } from "react";
 const AuthContext = React.createContext({
 	token: "",
 	isLoggedIn: false,
+	isAdmin: false,
+	admin: () => {},
 	login: (token) => {},
 	logout: () => {},
 });
@@ -19,11 +21,13 @@ const AuthContext = React.createContext({
 export const AuthContextProvider = (props) => {
 	const initialToken = localStorage.getItem("token");
 	const [token, setToken] = useState(initialToken);
+	const [userIsAdmin, setUserIsAdmin] = useState(false);
 
 	const userIsLoggedIn = !!token;
 
 	const logoutHandler = () => {
 		setToken(null);
+		setUserIsAdmin(false);
 		localStorage.removeItem("token");
 	};
 
@@ -36,10 +40,17 @@ export const AuthContextProvider = (props) => {
 		// logoutTimer = setTimeout(logoutHandler, remainingTime);
 	};
 
+	const admin = (email) => {
+		const str = email.substring(0, 5);
+		if (str === "admin") setUserIsAdmin(true);
+	};
+
 	const contextValue = {
 		token: token,
 		isLoggedIn: userIsLoggedIn,
+		isAdmin: userIsAdmin,
 		login: loginHandler,
+		admin,
 		logout: logoutHandler,
 	};
 

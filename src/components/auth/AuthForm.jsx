@@ -80,8 +80,8 @@ const AuthForm = () => {
 				// const expirationTime = new Date(
 				// 	new Date().getTime() + +data.expiresIn * 1000
 				// );
-				console.log(data);
 				authCtx.login(data.idToken);
+				authCtx.admin(data.email);
 				history.replace("/");
 			})
 			.catch((err) => {
