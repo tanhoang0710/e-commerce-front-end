@@ -40,32 +40,37 @@ export default function ChangePassword() {
 	};
 
 	return (
-		<div className="mt-[150px] flex items-center justify-center bg-[#5c5252] max-w-[600px] mx-auto text-white">
+		<div className="mt-[150px] flex items-center justify-center bg-[#5c5252] max-w-[600px] mx-auto text-white mb-4">
 			<form onSubmit={handleChangePassword} className="py-[30px]">
-				<div className="flex justify-between ">
+				<h3 className="uppercase text-center text-[24px] mb-5">
+					Đổi mật khẩu
+				</h3>
+				<div className="flex justify-between mb-5 items-center">
 					<label htmlFor="newPassword" className="mr-[20px]">
 						Nhập mật khẩu mới
 					</label>
 					<input
-						className="text-black"
+						className="text-black px-5 py-2 rounded-[5px]"
 						type="password"
 						id="newPassword"
 						ref={newPasswordRef}
 					/>
 				</div>
-				<div className="flex justify-between ">
+				<div className="flex justify-between items-center mb-5">
 					<label htmlFor="confirmNewPassword" className="mr-[20px]">
 						Nhập lại mật khẩu mới
 					</label>
 					<input
-						className="text-black"
+						className="text-black px-5 py-2 rounded-[5px]"
 						type="password"
 						id="confirmNewPassword"
 						ref={confirmNewPasswordRef}
 					/>
 				</div>
 				<div className="flex justify-center">
-					<button className="bg-[#322929]">Đổi mật khẩu</button>
+					<button className="bg-[#322929] py-3 px-5 rounded-[30px]">
+						Đổi mật khẩu
+					</button>
 				</div>
 				<ToastContainer />
 			</form>
