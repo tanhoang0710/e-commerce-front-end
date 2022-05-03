@@ -1,24 +1,67 @@
-import React from "react";
-import { MdOutlineSpaceDashboard, MdGroups } from "react-icons/md";
-import {
-	HiOutlineClipboardList,
-	HiOutlineShoppingBag,
-	HiOutlineCurrencyDollar,
-} from "react-icons/hi";
+import React, { useState } from "react";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { HiOutlineShoppingBag, HiVideoCamera } from "react-icons/hi";
+import { FaBarcode } from "react-icons/fa";
+import { Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
+import General from "../manage/General";
+import { useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Videos from "../manage/Videos";
+import DiscountCode from "../manage/DiscountCode";
+import AddDiscountCode from "../manage/AddDiscountCode";
+
+const categories = [
+	{
+		type: "general",
+		name: "Quản lí",
+		icon: <MdOutlineSpaceDashboard className="mr-[15px]" />,
+	},
+	{
+		type: "products",
+		name: "Sản phẩm",
+		icon: <HiOutlineShoppingBag className="mr-[15px]" />,
+	},
+	{
+		type: "videos",
+		name: "Video",
+		icon: <HiVideoCamera className="mr-[15px]" />,
+	},
+	{
+		type: "discountCode",
+		name: "Mã giảm giá",
+		icon: <FaBarcode className="mr-[15px]" />,
+	},
+];
 
 export default function Manage() {
+	const [categoryName, setCategoryName] = useState("general");
+
+	let { path, url } = useRouteMatch();
+
 	return (
 		<div className="mt-[83px] flex">
 			<div className="w-[25%] bg-[#4b3737] text-white p-[30px] pt-[6px] pr-0">
 				<h3 className="text-[30px]">IBiz Vietnam</h3>
 				<ul className="mt-[30px]">
-					<li className="flex items-center p-[10px] rounded-l-[20px] bg-white text-[#4b3737] cursor-pointer">
-						<MdOutlineSpaceDashboard className="mr-[15px]" />
-						<span>Quản lí</span>
-					</li>
+					{categories.map((category, index) => (
+						<Link
+							key={index}
+							to={`${url}/${category.type}`}
+							className={
+								category.type === categoryName
+									? "flex items-center p-[10px] rounded-l-[20px] mt-5 bg-white text-[#4b3737] cursor-pointer"
+									: "flex items-center p-[10px] rounded-l-[20px] mt-5 text-[#fff] cursor-pointer"
+							}
+							onClick={() => setCategoryName(category.type)}
+						>
+							{category.icon}
+							<span>{category.name}</span>
+						</Link>
+					))}
 				</ul>
 			</div>
-			<div className="w-[75%]">
+			<div className="w-[75%] flex flex-col">
 				<div className="flex items-center justify-between mx-6">
 					<h3 className="text-[26px]">Quản lí</h3>
 					<div>
@@ -28,66 +71,17 @@ export default function Manage() {
 						</span>
 					</div>
 				</div>
-				<div className="bg-[#f2f5fc]">
-					<div className=" flex gap-5 px-3 pt-9">
-						<div className="w-[25%] bg-white flex p-[30px] justify-around">
-							<div>
-								<span className="text-[30px] font-bold text-black">
-									54
-								</span>
-								<p className="text-[#a9a8a8] font-light text-[16px]">
-									Khách hàng
-								</p>
-							</div>
-							<MdGroups
-								color="#4b3737"
-								className="text-[30px] mt-[8px]"
-							/>
-						</div>
-						<div className="w-[25%] bg-white flex p-[30px] justify-around">
-							<div>
-								<span className="text-[30px] font-bold text-black">
-									79
-								</span>
-								<p className="text-[#a9a8a8] font-light text-[16px]">
-									Dự án
-								</p>
-							</div>
-							<HiOutlineClipboardList
-								color="#4b3737"
-								className="text-[30px] mt-[8px]"
-							/>
-						</div>
-						<div className="w-[25%] bg-white flex p-[30px] justify-around">
-							<div>
-								<span className="text-[30px] font-bold text-black">
-									124
-								</span>
-								<p className="text-[#a9a8a8] font-light text-[16px]">
-									Đơn hàng
-								</p>
-							</div>
-							<HiOutlineShoppingBag
-								color="#4b3737"
-								className="text-[30px] mt-[8px]"
-							/>
-						</div>
-						<div className="w-[25%] bg-white flex p-[30px] justify-around">
-							<div>
-								<span className="text-[30px] font-bold text-black">
-									$6k
-								</span>
-								<p className="text-[#a9a8a8] font-light text-[16px]">
-									Thu nhập
-								</p>
-							</div>
-							<HiOutlineCurrencyDollar
-								color="#4b3737"
-								className="text-[30px] mt-[8px]"
-							/>
-						</div>
-					</div>
-				</div>
+				<Switch>
+					<Route exact path={`${path}/:${categoryName}`}>
+						{categoryName === "general" && <General />}
+						{categoryName === "videos" && <Videos />}
+						{categoryName === "discountCode" && <DiscountCode />}
+						{categoryName === "products" && <General />}
+					</Route>
+					<Route path={`${path}/discountCode/:option`}>
+						<AddDiscountCode />
+					</Route>
+				</Switch>
 			</div>
 		</div>
 	);
