@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import Videos from "../manage/Videos";
 import DiscountCode from "../manage/DiscountCode";
 import AddDiscountCode from "../manage/AddDiscountCode";
+import ProductsManagement from "../manage/ProductsManagement";
+import AddProduct from "../manage/AddProduct";
 
 const categories = [
 	{
@@ -76,10 +78,13 @@ export default function Manage() {
 						{categoryName === "general" && <General />}
 						{categoryName === "videos" && <Videos />}
 						{categoryName === "discountCode" && <DiscountCode />}
-						{categoryName === "products" && <General />}
+						{categoryName === "products" && <ProductsManagement />}
 					</Route>
 					<Route path={`${path}/discountCode/:option`}>
 						<AddDiscountCode />
+					</Route>
+					<Route path={`${path}/products/:option`}>
+						<AddProduct />
 					</Route>
 				</Switch>
 			</div>

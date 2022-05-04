@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../components/UI/Button";
+import { toast, ToastContainer } from "react-toastify";
 
 const urls = [
 	"https://www.youtube.com/embed/QTAlov-cVnM",
@@ -11,9 +11,12 @@ const urls = [
 ];
 
 export default function Videos() {
+	const handleDeleteVideo = (index) => {
+		toast.success(`Xoá video ${index + 1} thành công`);
+	};
+
 	return (
 		<section className="bg-[#f2f5fc]">
-			<Button color="blue" text="Thêm" className="ml-[15px]" />
 			<div className=" flex flex-wrap items-center justify-center gap-[30px] pt-[16px] pb-[20px]">
 				{urls.map((url, index) => (
 					<div key={index}>
@@ -26,10 +29,16 @@ export default function Videos() {
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
 						></iframe>
-						<Button color="red" text="Xoá" />
+						<button
+							className={`mt-3 bg-transparent hover:bg-red-500 text-red-700 font-normal hover:text-white py-1 px-4 border border-red-500 border-solid hover:border-transparent rounded`}
+							onClick={() => handleDeleteVideo(index)}
+						>
+							Xoá
+						</button>
 					</div>
 				))}
 			</div>
+			<ToastContainer />
 		</section>
 	);
 }

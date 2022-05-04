@@ -5,6 +5,7 @@ import { FaTag } from "react-icons/fa";
 import { GoCalendar } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const titles = [
 	"PROMO CODE",
@@ -49,6 +50,10 @@ export default function DiscountCode() {
 	const match = useRouteMatch();
 	console.log(match);
 
+	const handleDeleteDiscountCode = (index) => {
+		toast.success("Xoá mã giảm giá thành công");
+	};
+
 	return (
 		<div className="w-[90%] table-auto mx-auto mt-[25px] flex-1">
 			<Link
@@ -84,7 +89,7 @@ export default function DiscountCode() {
 								<span>{code.value}</span>
 							</td>
 							<td className="p-2">
-								<span class="text-xs px-2 py-0.5 rounded font-light bg-[#10cfbd] text-white ">
+								<span className="text-xs px-2 py-0.5 rounded font-light bg-[#10cfbd] text-white ">
 									{code.status}
 								</span>
 							</td>
@@ -107,7 +112,12 @@ export default function DiscountCode() {
 								</div>
 							</td>
 							<td className="p-2">
-								<div className="text-red-500 text-[30px] flex justify-center">
+								<div
+									className="text-red-500 text-[30px] flex justify-center"
+									onClick={() =>
+										handleDeleteDiscountCode(index)
+									}
+								>
 									<TiDelete className="cursor-pointer" />
 								</div>
 							</td>
@@ -115,6 +125,7 @@ export default function DiscountCode() {
 					))}
 				</tbody>
 			</table>
+			<ToastContainer className="text-[16px]" />
 		</div>
 	);
 }
