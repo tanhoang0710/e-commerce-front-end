@@ -1,9 +1,15 @@
-import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
-export default function AddDiscountCode() {
-	const handleAddDiscountCode = () => {
-		toast.success("Thêm mã giảm giá thành công");
+export default function EditDiscountCode({ discountCode }) {
+	const [code, setCode] = useState(discountCode.code);
+	const [value, setValue] = useState(discountCode.value);
+	const [time, setTime] = useState(discountCode.time);
+	const [from, setFrom] = useState(discountCode.from);
+	const [to, setTo] = useState(discountCode.to);
+
+	const handleEditDiscountCode = () => {
+		toast.success("Sửa mã giảm giá thành công");
 	};
 
 	return (
@@ -19,6 +25,8 @@ export default function AddDiscountCode() {
 					type="text"
 					id="text"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					value={code}
+					onChange={(e) => setCode(e.target.value)}
 				/>
 			</div>
 			<div className="mb-[10px] flex items-center">
@@ -29,14 +37,9 @@ export default function AddDiscountCode() {
 					id="value"
 					type="number"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					onChange={(e) => setValue(e.target.value)}
+					value={value}
 				/>
-			</div>
-			<div className="mb-[10px] flex items-center">
-				<label htmlFor="active" className="mr-[15px] w-[120px]">
-					Trạng thái
-				</label>
-				<input type="checkbox" value={"active"} />
-				Hoạt động
 			</div>
 			<div className="mb-[10px] flex items-center">
 				<label htmlFor="times" className="mr-[15px] w-[120px]">
@@ -45,6 +48,8 @@ export default function AddDiscountCode() {
 				<input
 					type="number"
 					id="times"
+					onChange={(e) => setTime(e.target.value + "")}
+					value={time}
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
 				/>
 			</div>
@@ -56,6 +61,8 @@ export default function AddDiscountCode() {
 					type="datetime-local"
 					id="from"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					onChange={(e) => setFrom(e.target.value)}
+					value={from}
 				/>
 			</div>
 			<div className="mb-[10px] flex items-center">
@@ -66,13 +73,15 @@ export default function AddDiscountCode() {
 					type="datetime-local"
 					id="to"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					onChange={(e) => setTo(e.target.value)}
+					value={to}
 				/>
 			</div>
 			<button
 				className={`mt-3 bg-transparent hover:bg-blue-500 text-blue-700 font-normal hover:text-white py-1 px-4 border border-blue-500 border-solid hover:border-transparent rounded`}
-				onClick={handleAddDiscountCode}
+				onClick={handleEditDiscountCode}
 			>
-				Thêm
+				Lưu
 			</button>
 			<ToastContainer />
 		</div>

@@ -4,14 +4,17 @@ import { HiOutlineShoppingBag, HiVideoCamera } from "react-icons/hi";
 import { FaBarcode } from "react-icons/fa";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
-import General from "../manage/General";
 import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
+
+import General from "../manage/General";
 import Videos from "../manage/Videos";
 import DiscountCode from "../manage/DiscountCode";
 import AddDiscountCode from "../manage/AddDiscountCode";
 import ProductsManagement from "../manage/ProductsManagement";
-import AddProduct from "../manage/AddProduct";
+import ProductCategories from "../manage/ProductCategories";
+import EditProduct from "../manage/EditProduct";
+import EditDiscountCode from "../manage/EditDiscountCode";
 
 const categories = [
 	{
@@ -38,6 +41,8 @@ const categories = [
 
 export default function Manage() {
 	const [categoryName, setCategoryName] = useState("general");
+	const [product, setProduct] = useState({});
+	const [discountCode, setDiscountCode] = useState({});
 
 	let { path, url } = useRouteMatch();
 
@@ -77,14 +82,25 @@ export default function Manage() {
 					<Route exact path={`${path}/:${categoryName}`}>
 						{categoryName === "general" && <General />}
 						{categoryName === "videos" && <Videos />}
-						{categoryName === "discountCode" && <DiscountCode />}
+						{categoryName === "discountCode" && (
+							<DiscountCode setDiscountCode={setDiscountCode} />
+						)}
 						{categoryName === "products" && <ProductsManagement />}
 					</Route>
-					<Route path={`${path}/discountCode/:option`}>
+					<Route exact path={`${path}/discountCode/:option`}>
 						<AddDiscountCode />
 					</Route>
-					<Route path={`${path}/products/:option`}>
-						<AddProduct />
+					<Route exact path={`${path}/discountCode/:id/edit`}>
+						<EditDiscountCode
+							discountCode={discountCode}
+							setDiscountCode={setDiscountCode}
+						/>
+					</Route>
+					<Route exact path={`${path}/products/:productId`}>
+						<ProductCategories setProduct={setProduct} />
+					</Route>
+					<Route exact path={`${path}/products/:productId/:id/edit`}>
+						<EditProduct product={product} />
 					</Route>
 				</Switch>
 			</div>

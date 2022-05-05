@@ -1,5 +1,6 @@
 import React from "react";
 import { toast, ToastContainer } from "react-toastify";
+import Button from "../components/UI/Button";
 
 const urls = [
 	"https://www.youtube.com/embed/QTAlov-cVnM",
@@ -17,6 +18,7 @@ export default function Videos() {
 
 	return (
 		<section className="bg-[#f2f5fc]">
+			<Button color="blue" text="Thêm" className="ml-[15px]" />
 			<div className=" flex flex-wrap items-center justify-center gap-[30px] pt-[16px] pb-[20px]">
 				{urls.map((url, index) => (
 					<div key={index}>

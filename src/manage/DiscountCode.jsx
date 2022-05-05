@@ -6,6 +6,7 @@ import { GoCalendar } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const titles = [
 	"PROMO CODE",
@@ -20,38 +21,45 @@ const titles = [
 
 const codes = [
 	{
+		id: 1,
 		code: "ABC123",
-		value: "20%",
+		value: "20",
 		status: "ACTIVE",
 		time: 20,
-		from: "April 28, 2022 22:00",
-		to: "May 28, 2022 22:00",
+		from: "2022-04-28T22:00",
+		to: "2022-05-28T22:00",
 	},
 	{
+		id: 2,
 		code: "VIP1",
-		value: "100%",
+		value: "100",
 		status: "ACTIVE",
 		time: 5,
-		from: "June 10, 2022 15:00",
-		to: "July 10, 2022 15:00",
+		from: "2022-06-10T15:00",
+		to: "2022-07-10T15:00",
 	},
 	{
+		id: 3,
 		code: "VIP2",
-		value: "50%",
+		value: "50",
 		status: "ACTIVE",
 		time: 10,
-		from: "Jan 02, 2021 08:00",
-		to: "Feb 02, 2021 08:00",
+		from: "2022-01-02T08:00",
+		to: "2022-02-02T08:00",
 	},
 ];
 
-export default function DiscountCode() {
+export default function DiscountCode({ setDiscountCode }) {
 	let { url } = useRouteMatch();
-	const match = useRouteMatch();
-	console.log(match);
+	const history = useHistory();
 
 	const handleDeleteDiscountCode = (index) => {
 		toast.success("Xoá mã giảm giá thành công");
+	};
+
+	const handleEditDiscountCode = (code) => {
+		setDiscountCode(code);
+		history.push(`${url}/${code.id}/edit`);
 	};
 
 	return (
@@ -86,7 +94,7 @@ export default function DiscountCode() {
 							<td className="p-2 text-[#1a99fb]">{code.code}</td>
 							<td className="p-2 flex items-center">
 								<FaTag className="text-[16px] mr-[-2px] text-[#1a99fb] w-[50%]" />
-								<span>{code.value}</span>
+								<span>{code.value}%</span>
 							</td>
 							<td className="p-2">
 								<span className="text-xs px-2 py-0.5 rounded font-light bg-[#10cfbd] text-white ">
@@ -107,7 +115,10 @@ export default function DiscountCode() {
 								</div>
 							</td>
 							<td className="p-2 flex justify-center">
-								<div className="w-7 h-7 bg-[#1a99fb] grid place-items-center rounded-md text-white">
+								<div
+									className="w-7 h-7 bg-[#1a99fb] grid place-items-center rounded-md text-white"
+									onClick={() => handleEditDiscountCode(code)}
+								>
 									<MdEdit className="cursor-pointer text-[20px]" />
 								</div>
 							</td>
