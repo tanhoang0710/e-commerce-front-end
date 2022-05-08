@@ -156,8 +156,11 @@ export default function SofaProductsManagement({ setProduct }) {
 		<div>
 			<p className="text-[24px] ml-[22px]">Sofa</p>
 			<div className="overflow-y-scroll max-h-[500px]">
-				{products.map((product) => (
-					<div className="flex items-center bg-[#f5f7f9] w-[55%] mx-auto rounded-2xl shadow-2xl shadow-slate-500 p-[10px] gap-3 mb-5">
+				{products.map((product, index) => (
+					<div
+						className="flex items-center bg-[#f5f7f9] w-[55%] mx-auto rounded-2xl shadow-2xl shadow-slate-500 p-[10px] gap-3 mb-5"
+						key={index}
+					>
 						<div className="h-[60px] rounded-2xl overflow-hidden w-[60px] ml-[15px]">
 							<img
 								src={product.image}

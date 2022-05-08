@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 import { FaTag } from "react-icons/fa";
@@ -19,37 +19,23 @@ const titles = [
 	"DELETE",
 ];
 
-const codes = [
-	{
-		id: 1,
-		code: "ABC123",
-		value: "20",
-		status: "ACTIVE",
-		time: 20,
-		from: "2022-04-28T22:00",
-		to: "2022-05-28T22:00",
-	},
-	{
-		id: 2,
-		code: "VIP1",
-		value: "100",
-		status: "ACTIVE",
-		time: 5,
-		from: "2022-06-10T15:00",
-		to: "2022-07-10T15:00",
-	},
-	{
-		id: 3,
-		code: "VIP2",
-		value: "50",
-		status: "ACTIVE",
-		time: 10,
-		from: "2022-01-02T08:00",
-		to: "2022-02-02T08:00",
-	},
-];
-
 export default function DiscountCode({ setDiscountCode }) {
+	const [discountCodes, setDiscountCodes] = useState([]);
+
+	useEffect(() => {
+		const fetchCategories = async () => {
+			const res = await fetch(
+				"http://localhost:6969/e-commerce/api/discountCodes",
+				{
+					headers: { "Access-Control-Allow-Origin": true },
+				}
+			);
+			const data = await res.json();
+			setDiscountCodes(data);
+		};
+		fetchCategories();
+	}, []);
+
 	let { url } = useRouteMatch();
 	const history = useHistory();
 
@@ -86,7 +72,7 @@ export default function DiscountCode({ setDiscountCode }) {
 					</tr>
 				</thead>
 				<tbody>
-					{codes.map((code, index) => (
+					{discountCodes.map((code, index) => (
 						<tr
 							className="bg-gray-100 text-center border-b text-sm text-gray-600"
 							key={index}
