@@ -17,34 +17,64 @@ export default function ProductCategories({ setProduct }) {
 	return (
 		<div>
 			{params.productId === "sofa" && (
-				<SofaProductsManagement setProduct={setProduct} />
+				<SofaProductsManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "tv-shelf" && (
-				<TvshelfProductsManagement setProduct={setProduct} />
+				<TvshelfProductsManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "liquor-cabinet" && (
-				<LiquorCabinetProductsManagement setProduct={setProduct} />
+				<LiquorCabinetProductsManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "tea-table" && (
-				<TeaTableProductsManagement setProduct={setProduct} />
+				<TeaTableProductsManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "shoe-cabinet" && (
-				<ShoeCabinetProductsManagement setProduct={setProduct} />
+				<ShoeCabinetProductsManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "wardrobe" && (
-				<WardrobeManagement setProduct={setProduct} />
+				<WardrobeManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "bed" && (
-				<BedProductsManagement setProduct={setProduct} />
+				<BedProductsManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "makeup-table" && (
-				<MakeupTableProductsManagement setProduct={setProduct} />
+				<MakeupTableProductsManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "kitchen-cabinet" && (
-				<KitchenCabinetManagement setProduct={setProduct} />
+				<KitchenCabinetManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 			{params.productId === "dinner-table" && (
-				<DinnerTableProductsManagement setProduct={setProduct} />
+				<DinnerTableProductsManagement
+					setProduct={setProduct}
+					type={params.productId}
+				/>
 			)}
 		</div>
 	);

@@ -56,7 +56,7 @@ export default function DiscountCode({ setDiscountCode }) {
 			>
 				Thêm
 			</Link>
-			<table className="w-full border table-auto mt-5">
+			<table className="w-full border table-auto my-5">
 				<thead>
 					<tr className="bg-gray-50 border-b">
 						{titles.map((title, index) => (
