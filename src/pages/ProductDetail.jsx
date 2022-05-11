@@ -28,13 +28,13 @@ export default function ProductDetail({ item }) {
 	return (
 		<div className="mt-[150px] flex p-[15px]">
 			<div className="w-[50%] overflow-hidden relative">
-				<img src={item.image} alt="" />
+				<img src={item.img} alt="" />
 				<span
 					className={`absolute top-[10%] left-[-10px] inline-flex items-center justify-center px-2 py-1 text-xs leading-none text-white text-[16px] transform translate-x-1/2 w-[45px] h-[45px] -translate-y-1/2 bg-[#1f0f07] rounded-full ${
-						item.sale === "0%" ? "hidden" : ""
+						item.sale === 0 ? "hidden" : ""
 					}`}
 				>
-					-{item.sale}
+					-{item.sale}%
 				</span>
 			</div>
 			<div className="w-[50%] px-[30px]">
@@ -55,12 +55,13 @@ export default function ProductDetail({ item }) {
 				<p className="text-[24px] text-[#555] mb-4">{item.name}</p>
 				<div className="w-[30px] h-[3px] bg-[#ccc] mb-5"></div>
 				<div className="text-red-600 text-[28px]">
-					{item.sale !== "0%" && (
+					{item.sale !== 0 && (
 						<span className="opacity-60 line-through">
-							{item.oldPrice}{" "}
+							{item.oldPrice}
+							{"đ"}
 						</span>
 					)}
-					<span> {item.newPrice}</span>
+					<span> {item.newPrice}đ</span>
 				</div>
 				<p className="text-[#555] text-[23px] mt-[5px] mb-[20px]">
 					{item.desc}

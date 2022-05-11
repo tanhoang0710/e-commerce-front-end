@@ -17,16 +17,36 @@ export default function Products() {
 
 	return (
 		<div className="mt-[83px]">
-			{params.productid === "sofa" && <SofaProducts />}
-			{params.productid === "tv-shelf" && <TvshelfProducts />}
-			{params.productid === "liquor-cabinet" && <LiquorCabinetProducts />}
-			{params.productid === "tea-table" && <TeaTableProducts />}
-			{params.productid === "shoe-cabinet" && <ShoeCabinetProducts />}
-			{params.productid === "wardrobe" && <Wardrobe />}
-			{params.productid === "bed" && <BedProducts />}
-			{params.productid === "makeup-table" && <MakeupTableProducts />}
-			{params.productid === "kitchen-cabinet" && <KitchenCabinet />}
-			{params.productid === "dinner-table" && <DinnerTableProducts />}
+			{params.productid === "sofa" && (
+				<SofaProducts type={params.productid} />
+			)}
+			{params.productid === "tv-shelf" && (
+				<TvshelfProducts type={params.productid} />
+			)}
+			{params.productid === "liquor-cabinet" && (
+				<LiquorCabinetProducts type={params.productid} />
+			)}
+			{params.productid === "tea-table" && (
+				<TeaTableProducts type={params.productid} />
+			)}
+			{params.productid === "shoe-cabinet" && (
+				<ShoeCabinetProducts type={params.productid} />
+			)}
+			{params.productid === "wardrobe" && (
+				<Wardrobe type={params.productid} />
+			)}
+			{params.productid === "bed" && (
+				<BedProducts type={params.productid} />
+			)}
+			{params.productid === "makeup-table" && (
+				<MakeupTableProducts type={params.productid} />
+			)}
+			{params.productid === "kitchen-cabinet" && (
+				<KitchenCabinet type={params.productid} />
+			)}
+			{params.productid === "dinner-table" && (
+				<DinnerTableProducts type={params.productid} />
+			)}
 		</div>
 	);
 }

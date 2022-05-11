@@ -25,7 +25,7 @@ export default function Product({ data }) {
 		>
 			<Link to={`${match.url}/${data.id}`} onClick={clickHandler}>
 				<img
-					src={data.image}
+					src={data.img}
 					className="w-full h-full object-cover"
 					alt="slide"
 				/>
@@ -35,20 +35,21 @@ export default function Product({ data }) {
 						{data.name}
 					</div>
 					<div className="text-[#fdfce1]">
-						{data.sale !== "0%" && (
+						{data.sale !== 0 && (
 							<span className="opacity-60 line-through">
-								{data.oldPrice}{" "}
+								{data.oldPrice}
+								{"đ"}
 							</span>
 						)}
-						<span> {data.newPrice}</span>
+						<span> {data.newPrice}đ</span>
 					</div>
 				</div>
 				<span
 					className={`absolute top-[10%] left-[-10px] inline-flex items-center justify-center px-2 py-1 text-xs leading-none text-white text-[16px] transform translate-x-1/2 w-[45px] h-[45px] -translate-y-1/2 bg-[#1f0f07] rounded-full ${
-						data.sale === "0%" ? "hidden" : ""
+						data.sale === 0 ? "hidden" : ""
 					}`}
 				>
-					-{data.sale}
+					-{data.sale}%
 				</span>
 			</Link>
 			{/* <Route path={`${match.path}/:id`}>
