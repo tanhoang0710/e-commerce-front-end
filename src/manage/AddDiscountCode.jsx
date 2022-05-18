@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import { addNewDiscountCode } from "../store/discountCode-slice";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AddDiscountCode() {
+	const [code, setCode] = useState("");
+	const [value, setValue] = useState(0);
+	const [times, setTimes] = useState(0);
+	const [from, setFrom] = useState("");
+	const [to, setTo] = useState("");
+
+	const dispatch = useDispatch();
+
 	const handleAddDiscountCode = () => {
+		dispatch(
+			addNewDiscountCode({
+				id: uuidv4(),
+				code,
+				value,
+				status: "ACTIVE",
+				time: times,
+				from,
+				to,
+			})
+		);
 		toast.success("Thêm mã giảm giá thành công");
 	};
 
@@ -19,6 +41,8 @@ export default function AddDiscountCode() {
 					type="text"
 					id="text"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					value={code}
+					onChange={(e) => setCode(e.target.value)}
 				/>
 			</div>
 			<div className="mb-[10px] flex items-center">
@@ -29,14 +53,9 @@ export default function AddDiscountCode() {
 					id="value"
 					type="number"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					value={value}
+					onChange={(e) => setValue(e.target.value)}
 				/>
-			</div>
-			<div className="mb-[10px] flex items-center">
-				<label htmlFor="active" className="mr-[15px] w-[120px]">
-					Trạng thái
-				</label>
-				<input type="checkbox" value={"active"} />
-				Hoạt động
 			</div>
 			<div className="mb-[10px] flex items-center">
 				<label htmlFor="times" className="mr-[15px] w-[120px]">
@@ -46,6 +65,8 @@ export default function AddDiscountCode() {
 					type="number"
 					id="times"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					value={times}
+					onChange={(e) => setTimes(e.target.value)}
 				/>
 			</div>
 			<div className="mb-[10px] flex items-center">
@@ -56,6 +77,8 @@ export default function AddDiscountCode() {
 					type="datetime-local"
 					id="from"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					value={from}
+					onChange={(e) => setFrom(e.target.value)}
 				/>
 			</div>
 			<div className="mb-[10px] flex items-center">
@@ -66,6 +89,8 @@ export default function AddDiscountCode() {
 					type="datetime-local"
 					id="to"
 					className="rounded-lg border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
+					value={to}
+					onChange={(e) => setTo(e.target.value)}
 				/>
 			</div>
 			<button

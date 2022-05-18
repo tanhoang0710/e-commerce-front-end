@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
+import { updateDiscountCode } from "../store/discountCode-slice";
 
 export default function EditDiscountCode({ discountCode }) {
 	const [code, setCode] = useState(discountCode.code);
@@ -8,7 +10,20 @@ export default function EditDiscountCode({ discountCode }) {
 	const [from, setFrom] = useState(discountCode.from);
 	const [to, setTo] = useState(discountCode.to);
 
+	const dispatch = useDispatch();
+
 	const handleEditDiscountCode = () => {
+		dispatch(
+			updateDiscountCode({
+				id: discountCode.id,
+				code,
+				value,
+				status: "ACTIVE",
+				time,
+				from,
+				to,
+			})
+		);
 		toast.success("Sửa mã giảm giá thành công");
 	};
 

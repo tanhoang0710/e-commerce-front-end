@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 import { FaTag } from "react-icons/fa";
@@ -7,6 +7,11 @@ import { Link } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	deleteDiscountCode,
+	fetchDiscountCodes,
+} from "../store/discountCode-slice";
 
 const titles = [
 	"PROMO CODE",
@@ -20,26 +25,22 @@ const titles = [
 ];
 
 export default function DiscountCode({ setDiscountCode }) {
-	const [discountCodes, setDiscountCodes] = useState([]);
+	const discountCodes = useSelector(
+		(state) => state.discountCodes.discountCodes
+	);
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const fetchCategories = async () => {
-			const res = await fetch(
-				"http://localhost:6969/e-commerce/api/discountCodes",
-				{
-					headers: { "Access-Control-Allow-Origin": true },
-				}
-			);
-			const data = await res.json();
-			setDiscountCodes(data);
-		};
-		fetchCategories();
-	}, []);
+		dispatch(fetchDiscountCodes());
+	}, [dispatch]);
+	console.log(discountCodes);
 
 	let { url } = useRouteMatch();
 	const history = useHistory();
 
-	const handleDeleteDiscountCode = (index) => {
+	const handleDeleteDiscountCode = (id) => {
+		dispatch(deleteDiscountCode(id));
 		toast.success("Xoá mã giảm giá thành công");
 	};
 
@@ -112,7 +113,7 @@ export default function DiscountCode({ setDiscountCode }) {
 								<div
 									className="text-red-500 text-[30px] flex justify-center"
 									onClick={() =>
-										handleDeleteDiscountCode(index)
+										handleDeleteDiscountCode(code.id)
 									}
 								>
 									<TiDelete className="cursor-pointer" />

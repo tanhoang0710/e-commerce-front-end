@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 import { toast, ToastContainer } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct, fetchProductsByType } from "../store/product-slice";
 
 export default function TvshelfProductsManagement({ setProduct, type }) {
 	const history = useHistory();
 	const { url } = useRouteMatch();
 
-	const [products, setProducts] = useState([]);
+	const dispatch = useDispatch();
+
+	const products = useSelector((state) => state.products.products);
 
 	useEffect(() => {
-		const fetchProduct = async () => {
-			const res = await fetch(
-				`http://localhost:6969/e-commerce/api/products?type=${type}`,
-				{
-					headers: { "Access-Control-Allow-Origin": true },
-				}
-			);
-			const data = await res.json();
-			setProducts(data);
-		};
-		fetchProduct();
-	}, [type]);
+		dispatch(fetchProductsByType(type));
+	}, [dispatch, type]);
 
-	const handleDeleteProduct = (index) => {
+	const handleDeleteProduct = (id) => {
+		dispatch(deleteProduct(id));
 		toast.success("Xoá sản phẩm thành công");
 	};
+
 	const handleEditProduct = (product) => {
 		setProduct(product);
 		history.push(`${url}/${product.id}/edit`);

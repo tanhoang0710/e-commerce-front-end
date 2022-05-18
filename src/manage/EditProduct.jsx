@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
+import { updateProduct } from "../store/product-slice";
 
 export default function EditProduct({ product }) {
 	const [sale, setSale] = useState(product.sale);
@@ -8,7 +10,20 @@ export default function EditProduct({ product }) {
 	const [newPrice, setNewPrice] = useState(product.newPrice);
 	const [desc, setDesc] = useState(product.desc);
 
+	const dispatch = useDispatch();
+
 	const handleEditProduct = () => {
+		dispatch(
+			updateProduct({
+				id: product.id,
+				sale,
+				label: product.label,
+				name,
+				oldPrice,
+				newPrice,
+				desc,
+			})
+		);
 		toast.success("Sửa sản phẩm thành công");
 	};
 
