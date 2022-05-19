@@ -2,19 +2,20 @@ import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { CgArrowLongLeft } from "react-icons/cg";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
 	addSingleItemToCart,
 	removeItemFromCart,
 	removeWholeItemFromCart,
 } from "../store/cart-slice";
-import { AiFillTag } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import AuthContext from "../components/context/auth-context";
 
 export default function Cart() {
 	const cart = useSelector((state) => state.cart);
 	const dispatch = useDispatch();
+	const history = useHistory();
+	const authCtx = useContext(AuthContext);
 
 	const totalPrice = cart.items.reduce(
 		(acc, item) => acc + item.totalPrice,
@@ -33,21 +34,13 @@ export default function Cart() {
 		dispatch(removeWholeItemFromCart(item.id));
 	};
 
-	const history = useHistory();
-
 	const handleClick = () => {
 		history.push("/");
-		// window.scrollTo({
-		// 	top: 0,
-		// 	behavior: "smooth",
-		// });
 	};
 
 	const backToProductHandler = () => {
 		history.push("/products/sofa");
 	};
-
-	const authCtx = useContext(AuthContext);
 
 	return (
 		<>
@@ -169,20 +162,6 @@ export default function Cart() {
 						>
 							TIẾN HÀNH THANH TOÁN
 						</Link>
-						<h2 className="text-[#7a7978] font-normal text-normal text-[19px] leading-[30px] border-b-[3px] mt-5">
-							<AiFillTag className="inline-block mr-[6px]" />
-							Phiễu ưu đãi
-						</h2>
-						<div className="mt-5 px-[10px] border-[#ccc] border-[1px] transition-all duration-300">
-							<input
-								className="block w-full py-[6px]"
-								type="text"
-								placeholder="Mã ưu đãi"
-							/>
-						</div>
-						<div className="text-center border-[#ccc] text-[18px] font-normal py-1 text-[#696969] border-[1px] bg-inherit hover:bg-[#ccc] w-full mt-[15px] transition-all duration-300">
-							Áp dụng
-						</div>
 					</div>
 				</div>
 			)}

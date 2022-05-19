@@ -2,11 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const discountCodeSlice = createSlice({
 	name: "discountCodes",
-	initialState: { discountCodes: [] },
+	initialState: { discountCodes: [], discountCode: {} },
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchDiscountCodes.fulfilled, (state, action) => {
 				state.discountCodes = action.payload;
+			})
+			.addCase(fetchOneDiscountCode.fulfilled, (state, action) => {
+				state.discountCode = action.payload;
 			})
 			.addCase(addNewDiscountCode.fulfilled, (state, action) => {
 				state.discountCodes.push(action.payload);
@@ -31,6 +34,20 @@ export const fetchDiscountCodes = createAsyncThunk(
 	async () => {
 		const res = await fetch(
 			"http://localhost:6969/e-commerce/api/discountCodes",
+			{
+				headers: { "Access-Control-Allow-Origin": true },
+			}
+		);
+		const data = await res.json();
+		return data;
+	}
+);
+
+export const fetchOneDiscountCode = createAsyncThunk(
+	"discountCodes/fetchOneDiscountCode",
+	async (code) => {
+		const res = await fetch(
+			`http://localhost:6969/e-commerce/api/discountCodes/${code}`,
 			{
 				headers: { "Access-Control-Allow-Origin": true },
 			}
