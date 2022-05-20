@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Input from "../components/UI/Input";
 import { AiFillTag } from "react-icons/ai";
 import moment from "moment";
 import { toast, ToastContainer } from "react-toastify";
+import { updateDiscountCode } from "../store/discountCode-slice";
 
 export default function Checkout() {
 	const cart = useSelector((state) => state.cart);
@@ -15,6 +16,7 @@ export default function Checkout() {
 	);
 
 	const form = useRef();
+	const dispatch = useDispatch();
 
 	const [discountCode, setDiscountCode] = useState("");
 	const [money, setMoney] = useState(totalPrice);
@@ -50,8 +52,22 @@ export default function Checkout() {
 		}
 	};
 
-	const handleCheckout = () => {
+	const handleCheckout = async () => {
 		alert("Bạn đã đặt hàng thành công");
+		// giảm số lần còn sử dụng được xuống 1
+		const res = await fetch(
+			`http://localhost:6969/e-commerce/api/discountCodes/${discountCode}`,
+			{
+				headers: { "Access-Control-Allow-Origin": true },
+			}
+		);
+		const data = await res.json();
+		dispatch(
+			updateDiscountCode({
+				...data,
+				time: data.time - 1,
+			})
+		);
 	};
 
 	return (
