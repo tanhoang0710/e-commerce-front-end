@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Input from "../components/UI/Input";
 import { AiFillTag } from "react-icons/ai";
+import moment from "moment";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Checkout() {
 	const cart = useSelector((state) => state.cart);
@@ -12,6 +13,8 @@ export default function Checkout() {
 		(acc, item) => acc + item.totalPrice,
 		0
 	);
+
+	const form = useRef();
 
 	const [discountCode, setDiscountCode] = useState("");
 	const [money, setMoney] = useState(totalPrice);
@@ -30,14 +33,31 @@ export default function Checkout() {
 		);
 		const data = await res.json();
 		if (data) {
-			setMoney((totalPrice * (100 - data.value)) / 100);
+			const from = moment.utc(data.from);
+			const to = moment.utc(data.to);
+			const current = moment(new Date());
+			const isBetween = current.isBetween(from, to, undefined, "()");
+			if (data.time >= 1 && data.status === "ACTIVE" && isBetween) {
+				setMoney((totalPrice * (100 - data.value)) / 100);
+				toast.success("Thêm mã giảm giá thành công");
+			} else {
+				setMoney(totalPrice);
+				toast.error("Mã giảm giá không hợp lệ");
+			}
+		} else {
+			setMoney(totalPrice);
+			toast.error("Mã giảm giá không tồn tại");
 		}
+	};
+
+	const handleCheckout = () => {
+		alert("Bạn đã đặt hàng thành công");
 	};
 
 	return (
 		<div className="mt-[150px] flex pb-4">
 			<div className="w-[60%] pl-5">
-				<form>
+				<form ref={form}>
 					<h2 className="text-[#555] font-normal uppercase text-[19px] leading-[30px]">
 						THÔNG TIN THANH TOÁN
 					</h2>
@@ -65,7 +85,7 @@ export default function Checkout() {
 					></textarea>
 				</form>
 			</div>
-			<div className="w-[40%] ml-[30px] p-[30px] border-2 border-black ">
+			<div className="w-[40%] ml-[30px] p-[30px] border-2 border-black">
 				<h2 className="text-[#7a7978] font-normal uppercase text-[19px] leading-[30px]">
 					ĐƠN HÀNG CỦA BẠN
 				</h2>
@@ -105,12 +125,12 @@ export default function Checkout() {
 				>
 					Áp dụng
 				</div>
-				<Link
-					to="/checkout"
+				<button
 					className="hover:bg-[#6b3927] inline-block cursor-pointer transition-all duration-300 bg-[#b76041] text-white text-center mt-[30px] pt-2 text-[19px] px-[18px] py-[6px]"
+					onClick={handleCheckout}
 				>
 					ĐẶT HÀNG
-				</Link>
+				</button>
 				<button
 					className="hover:bg-[#6b3927] inline-block cursor-pointer transition-all duration-300 bg-[#b76041] text-white text-center mt-[30px] pt-2 text-[19px] px-[18px] py-[6px] ml-6"
 					onClick={backToCartHandler}
@@ -123,6 +143,7 @@ export default function Checkout() {
 					khác đã được mô tả trong chính sách riêng tư của chúng tôi.
 				</p>
 			</div>
+			<ToastContainer />
 		</div>
 	);
 }
