@@ -32,7 +32,7 @@ export default function NewCategory() {
 	return (
 		<section className="mb-[75px]">
 			<h2 className="section-title">TIN TỨC</h2>
-			<div className="px-[10px] columns-3">
+			<div className="px-[10px] flex gap-3">
 				{news.map((item, index) => (
 					<Link
 						to="/news/:newId"
