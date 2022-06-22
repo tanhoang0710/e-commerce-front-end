@@ -19,6 +19,9 @@ const productSlice = createSlice({
 				state.products = state.products.filter(
 					(item) => item.id !== action.payload
 				);
+			})
+			.addCase(addProduct.fulfilled, (state, action) => {
+				state.products.push(action.payload);
 			});
 	},
 });
@@ -68,6 +71,26 @@ export const deleteProduct = createAsyncThunk(
 					"Content-Type": "application/json",
 				},
 				method: "DELETE",
+			}
+		);
+
+		const data = res.json();
+		return data;
+	}
+);
+
+export const addProduct = createAsyncThunk(
+	"videos/addVideo",
+	async (newProduct) => {
+		const res = await fetch(
+			"http://localhost:6969/e-commerce/api/products",
+			{
+				headers: {
+					"Access-Control-Allow-Origin": true,
+					"Content-Type": "application/json",
+				},
+				method: "POST",
+				body: JSON.stringify(newProduct),
 			}
 		);
 
