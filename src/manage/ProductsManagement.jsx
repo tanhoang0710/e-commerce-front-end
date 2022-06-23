@@ -55,7 +55,7 @@ export default function ProductsManagement() {
 				categoryId,
 			})
 		);
-		toast.success("Thêm mã giảm giá thành công");
+		toast.success("Thêm sản phẩm thành công");
 	};
 
 	return (
