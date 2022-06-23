@@ -1,8 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setItem } from "../../store/item-slice";
 
 export default function ProductItem({ data }) {
 	let cate = "sofa";
+
+	const dispatch = useDispatch();
+
+	const clickHandler = () => {
+		const item = {
+			...data,
+		};
+		dispatch(setItem(item));
+	};
 
 	switch (data.categoryId) {
 		case "1":
@@ -40,7 +51,7 @@ export default function ProductItem({ data }) {
 	}
 
 	return (
-		<Link to={`/products/${cate}/${data.id}`}>
+		<Link to={`/products/${cate}/${data.id}`} onClick={clickHandler}>
 			<div className="flex">
 				<img src={data.img} alt="" className="w-[50px] h-[50px]" />
 				<h2>{data.name}</h2>

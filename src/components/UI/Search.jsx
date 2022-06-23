@@ -64,11 +64,11 @@ export default function Search() {
 				appendTo={() => document.body}
 				render={(attrs) => (
 					<div
-						className="w-[500px] max-h-[700px] min-h-[100px]"
+						className="w-[500px] max-h-[700px] overflow-y-auto"
 						tabIndex="-1"
 						{...attrs}
 					>
-						<div className="w-[500px] max-h-[700px] min-h-[100px] rounded-[8px] shadow-lg pt-[8px] flex flex-col bg-white">
+						<div className="w-[500px] max-h-[700px] rounded-[8px] shadow-lg pt-[8px] flex flex-col bg-white">
 							<h4 className="text-gray-800 text-[14px] px-[12px] py-[5px]">
 								Sản phẩm
 							</h4>
@@ -81,6 +81,7 @@ export default function Search() {
 				visible={showResult && searchResult.length > 0}
 				interactive
 				onClickOutside={handleHideResult}
+				placement="bottom"
 			>
 				<div className="flex w-full">
 					<input
