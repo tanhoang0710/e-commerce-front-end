@@ -6,10 +6,7 @@ export default function Video() {
 	useEffect(() => {
 		const fetchCategories = async () => {
 			const res = await fetch(
-				"http://localhost:6969/e-commerce/api/videos",
-				{
-					headers: { "Access-Control-Allow-Origin": true },
-				}
+				"https://62d7a64b49c87ff2af39cb02.mockapi.io/videos"
 			);
 			const data = await res.json();
 			setVideos(data);

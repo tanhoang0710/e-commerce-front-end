@@ -23,7 +23,7 @@ const discountCodeSlice = createSlice({
 			})
 			.addCase(deleteDiscountCode.fulfilled, (state, action) => {
 				state.discountCodes = state.discountCodes.filter(
-					(item) => item.id !== action.payload
+					(item) => item.id !== action.payload.id
 				);
 			});
 	},
@@ -33,7 +33,7 @@ export const fetchDiscountCodes = createAsyncThunk(
 	"discountCodes/fetchDiscountCodes",
 	async () => {
 		const res = await fetch(
-			"http://localhost:6969/e-commerce/api/discountCodes",
+			"https://62d7a64b49c87ff2af39cb02.mockapi.io/discountCodes",
 			{
 				headers: { "Access-Control-Allow-Origin": true },
 			}
@@ -47,7 +47,7 @@ export const fetchOneDiscountCode = createAsyncThunk(
 	"discountCodes/fetchOneDiscountCode",
 	async (code) => {
 		const res = await fetch(
-			`http://localhost:6969/e-commerce/api/discountCodes/${code}`,
+			`https://62d7a64b49c87ff2af39cb02.mockapi.io/discountCodes/${code}`,
 			{
 				headers: { "Access-Control-Allow-Origin": true },
 			}
@@ -61,7 +61,7 @@ export const addNewDiscountCode = createAsyncThunk(
 	"discountCodes/addNewDiscountCode",
 	async (newDiscountCode) => {
 		const res = await fetch(
-			"http://localhost:6969/e-commerce/api/discountCodes",
+			"https://62d7a64b49c87ff2af39cb02.mockapi.io/discountCodes",
 			{
 				headers: {
 					"Access-Control-Allow-Origin": true,
@@ -81,7 +81,7 @@ export const updateDiscountCode = createAsyncThunk(
 	"discountCodes/updateDiscountCode",
 	async (newDiscountCode) => {
 		const res = await fetch(
-			`http://localhost:6969/e-commerce/api/discountCodes/${newDiscountCode.id}`,
+			`https://62d7a64b49c87ff2af39cb02.mockapi.io/discountCodes/${newDiscountCode.id}`,
 			{
 				headers: {
 					"Access-Control-Allow-Origin": true,
@@ -101,7 +101,7 @@ export const deleteDiscountCode = createAsyncThunk(
 	"discountCodes/deleteDiscountCode",
 	async (id) => {
 		const res = await fetch(
-			`http://localhost:6969/e-commerce/api/discountCodes/${id}`,
+			`https://62d7a64b49c87ff2af39cb02.mockapi.io/discountCodes/${id}`,
 			{
 				headers: {
 					"Access-Control-Allow-Origin": true,
