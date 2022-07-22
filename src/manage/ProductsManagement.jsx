@@ -16,15 +16,12 @@ export default function ProductsManagement() {
 	const [oldPrice, setOldPrice] = useState("");
 	const [newPrice, setNewPrice] = useState("");
 	const [desc, setDesc] = useState("");
-	const [categoryId, setCategoryId] = useState("");
+	const [categoryName, setCategoryName] = useState("");
 
 	useEffect(() => {
 		const fetchCategories = async () => {
 			const res = await fetch(
-				"http://localhost:6969/e-commerce/api/categories",
-				{
-					headers: { "Access-Control-Allow-Origin": true },
-				}
+				"https://62d7a64b49c87ff2af39cb02.mockapi.io/categories"
 			);
 			const data = await res.json();
 			setCategories(data);
@@ -52,7 +49,7 @@ export default function ProductsManagement() {
 				oldPrice,
 				newPrice,
 				desc,
-				categoryId,
+				categoryName,
 			})
 		);
 		toast.success("Thêm sản phẩm thành công");
@@ -140,14 +137,14 @@ export default function ProductsManagement() {
 						onChange={(e) => setDesc(e.target.value)}
 					/>
 					<label htmlFor="text" className="mr-[15px] w-[120px] block">
-						Mã danh mục
+						Tên danh mục
 					</label>
 					<input
 						type="text"
 						id="text"
 						className="rounded-lg w-[400px] border-solid px-4 py-1 border text-gray-800 border-gray-200 bg-white"
-						value={categoryId}
-						onChange={(e) => setCategoryId(e.target.value)}
+						value={categoryName}
+						onChange={(e) => setCategoryName(e.target.value)}
 					/>
 					<button
 						className="ml-[15px] mt-3 bg-transparent hover:bg-blue-500 text-blue-700 font-normal hover:text-white py-1 px-4 border border-blue-500 border-solid hover:border-transparent rounded"

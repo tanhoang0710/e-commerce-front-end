@@ -13,7 +13,7 @@ export default function KitchenCabinet({ type }) {
 	useEffect(() => {
 		const fetchProduct = async () => {
 			const res = await fetch(
-				`http://localhost:6969/e-commerce/api/products?type=${type}`,
+				`https://62d7a64b49c87ff2af39cb02.mockapi.io/products?categoryName=${type}`,
 				{
 					headers: { "Access-Control-Allow-Origin": true },
 				}

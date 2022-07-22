@@ -28,19 +28,19 @@ export default function Checkout() {
 
 	const handleApplyDiscountCode = async () => {
 		const res = await fetch(
-			`http://localhost:6969/e-commerce/api/discountCodes/${discountCode}`,
+			`https://62d7a64b49c87ff2af39cb02.mockapi.io/discountCodes?code=${discountCode}`,
 			{
 				headers: { "Access-Control-Allow-Origin": true },
 			}
 		);
 		const data = await res.json();
-		if (data) {
-			const from = moment.utc(data.from);
-			const to = moment.utc(data.to);
+		if (data[0]) {
+			const from = moment.utc(data[0].from);
+			const to = moment.utc(data[0].to);
 			const current = moment(new Date());
 			const isBetween = current.isBetween(from, to, undefined, "()");
-			if (data.time >= 1 && data.status === "ACTIVE" && isBetween) {
-				setMoney((totalPrice * (100 - data.value)) / 100);
+			if (data[0].time >= 1 && data[0].status === "ACTIVE" && isBetween) {
+				setMoney((totalPrice * (100 - data[0].value)) / 100);
 				toast.success("Thêm mã giảm giá thành công");
 			} else {
 				setMoney(totalPrice);
@@ -56,7 +56,7 @@ export default function Checkout() {
 		alert("Bạn đã đặt hàng thành công");
 		// giảm số lần còn sử dụng được xuống 1
 		const res = await fetch(
-			`http://localhost:6969/e-commerce/api/discountCodes/${discountCode}`,
+			`https://62d7a64b49c87ff2af39cb02.mockapi.io/discountCodes?code=${discountCode}`,
 			{
 				headers: { "Access-Control-Allow-Origin": true },
 			}
@@ -64,8 +64,8 @@ export default function Checkout() {
 		const data = await res.json();
 		dispatch(
 			updateDiscountCode({
-				...data,
-				time: data.time - 1,
+				...data[0],
+				time: data[0].time - 1,
 			})
 		);
 	};
@@ -77,7 +77,7 @@ export default function Checkout() {
 					<h2 className="text-[#555] font-normal uppercase text-[19px] leading-[30px]">
 						THÔNG TIN THANH TOÁN
 					</h2>
-					<div className="flex gap-5 justify-between">
+					<div className="flex justify-between gap-5">
 						<div className="w-[50%]">
 							<Input placeholder="Tên" />
 						</div>

@@ -25,7 +25,7 @@ export default function Search() {
 		const fetchApi = async () => {
 			setLoading(true);
 			fetch(
-				`http://localhost:6969/e-commerce/api/products/search?q=${debounced}`
+				`https://62d7a64b49c87ff2af39cb02.mockapi.io/products?name=${debounced}`
 			)
 				.then((res) => res.json())
 				.then((res) => {

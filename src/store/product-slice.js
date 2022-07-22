@@ -10,14 +10,13 @@ const productSlice = createSlice({
 			})
 			.addCase(updateProduct.fulfilled, (state, action) => {
 				let currentProduct = state.products.find(
-					(discountCode) => discountCode.id === action.payload.id
+					(product) => product.id === action.payload.id
 				);
-				currentProduct = action.payload;
-				console.log(currentProduct);
+				state.products[currentProduct.id] = action.payload;
 			})
 			.addCase(deleteProduct.fulfilled, (state, action) => {
 				state.products = state.products.filter(
-					(item) => item.id !== action.payload
+					(item) => item.id !== action.payload.id
 				);
 			})
 			.addCase(addProduct.fulfilled, (state, action) => {
@@ -27,10 +26,10 @@ const productSlice = createSlice({
 });
 
 export const fetchProductsByType = createAsyncThunk(
-	"videos/fetchVideos",
+	"products/fetchProductsByType",
 	async (type) => {
 		const res = await fetch(
-			`http://localhost:6969/e-commerce/api/products?type=${type}`,
+			`https://62d7a64b49c87ff2af39cb02.mockapi.io/products?categoryName=${type}`,
 			{
 				headers: { "Access-Control-Allow-Origin": true },
 			}
@@ -41,10 +40,10 @@ export const fetchProductsByType = createAsyncThunk(
 );
 
 export const updateProduct = createAsyncThunk(
-	"videos/updateVideo",
+	"products/updateProduct",
 	async (newProduct) => {
 		const res = await fetch(
-			`http://localhost:6969/e-commerce/api/products/${newProduct.id}`,
+			`https://62d7a64b49c87ff2af39cb02.mockapi.io/products/${newProduct.id}`,
 			{
 				headers: {
 					"Access-Control-Allow-Origin": true,
@@ -61,10 +60,10 @@ export const updateProduct = createAsyncThunk(
 );
 
 export const deleteProduct = createAsyncThunk(
-	"videos/deleteVideo",
+	"products/deleteProduct",
 	async (id) => {
 		const res = await fetch(
-			`http://localhost:6969/e-commerce/api/products/${id}`,
+			`https://62d7a64b49c87ff2af39cb02.mockapi.io/products/${id}`,
 			{
 				headers: {
 					"Access-Control-Allow-Origin": true,
@@ -80,10 +79,10 @@ export const deleteProduct = createAsyncThunk(
 );
 
 export const addProduct = createAsyncThunk(
-	"videos/addVideo",
+	"products/addProduct",
 	async (newProduct) => {
 		const res = await fetch(
-			"http://localhost:6969/e-commerce/api/products",
+			"https://62d7a64b49c87ff2af39cb02.mockapi.io/products",
 			{
 				headers: {
 					"Access-Control-Allow-Origin": true,
